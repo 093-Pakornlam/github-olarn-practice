@@ -1,0 +1,53 @@
+Evidence: Part 9 – Repository Activity
+Scope: HEAD movements
+Generated: 2026-02-19 20:46:21 UTC
+----------------------------------------
+24a2ff7 HEAD@{0}: checkout: moving from main to task/07-evidence-reflog
+24a2ff7 HEAD@{1}: merge refs/remotes/origin/main: Fast-forward
+92f85d1 HEAD@{2}: checkout: moving from task/05-recovery to main
+58e6147 HEAD@{3}: commit: Recovery: Restore previous state
+e968a86 HEAD@{4}: commit: dsfkj
+92f85d1 HEAD@{5}: checkout: moving from main to task/05-recovery
+92f85d1 HEAD@{6}: merge refs/remotes/origin/main: Fast-forward
+5f479b5 HEAD@{7}: checkout: moving from task/04-conflict-resolve to main
+4430db6 HEAD@{8}: commit (merge): Merge: Resolve conflict on index.html
+fbcf457 HEAD@{9}: checkout: moving from task/03-conflict-create to task/04-conflict-resolve
+fbcf457 HEAD@{10}: checkout: moving from task/03b-conflict-create-alt to task/03-conflict-create
+09b96c2 HEAD@{11}: commit: Conflict: Modify same line in index.html
+5f479b5 HEAD@{12}: checkout: moving from task/03-conflict-create to task/03b-conflict-create-alt
+fbcf457 HEAD@{13}: commit: Conflict: Modify same line in index.html
+5f479b5 HEAD@{14}: checkout: moving from task/03-conflict-create to task/03-conflict-create
+5f479b5 HEAD@{15}: checkout: moving from task/03b-conflict-create-alt to task/03-conflict-create
+5f479b5 HEAD@{16}: checkout: moving from main to task/03b-conflict-create-alt
+5f479b5 HEAD@{17}: checkout: moving from task/03b-conflict-create-alt to main
+5f479b5 HEAD@{18}: checkout: moving from main to task/03b-conflict-create-alt
+5f479b5 HEAD@{19}: checkout: moving from task/03b-conflict-create-alt to main
+5f479b5 HEAD@{20}: checkout: moving from task/03-conflict-create to task/03b-conflict-create-alt
+5f479b5 HEAD@{21}: checkout: moving from task/03b-conflict-create-alt to task/03-conflict-create
+5f479b5 HEAD@{22}: checkout: moving from task/03-conflict-create to task/03b-conflict-create-alt
+5f479b5 HEAD@{23}: checkout: moving from main to task/03-conflict-create
+5f479b5 HEAD@{24}: checkout: moving from task/03-conflict-create to main
+5f479b5 HEAD@{25}: Branch: renamed refs/heads/main to refs/heads/task/03-conflict-create
+5f479b5 HEAD@{27}: checkout: moving from task/03-conflict-create to main
+c2ff231 HEAD@{28}: checkout: moving from main to task/03-conflict-create
+5f479b5 HEAD@{29}: merge refs/remotes/origin/main: Fast-forward
+c2ff231 HEAD@{30}: checkout: moving from task/02-feature-index to main
+342fbdf HEAD@{31}: commit: Feature: Update index.html content
+ea24227 HEAD@{32}: reset: moving to ea24227
+d1eb330 HEAD@{33}: commit: eature: Update index.html content
+ea24227 HEAD@{34}: checkout: moving from task/03-conflict-create to task/02-feature-index
+c2ff231 HEAD@{35}: checkout: moving from main to task/03-conflict-create
+c2ff231 HEAD@{36}: merge refs/remotes/origin/main: Fast-forward
+3a208f3 HEAD@{37}: checkout: moving from task/02-feature-index to main
+ea24227 HEAD@{38}: commit: Feature: Update index.html content
+3a208f3 HEAD@{39}: checkout: moving from main to task/02-feature-index
+3a208f3 HEAD@{40}: merge refs/remotes/origin/main: Fast-forward
+daa77eb HEAD@{41}: checkout: moving from task/01-collaborators to main
+d2196ce HEAD@{42}: commit: Feature: Setup collaborators
+daa77eb HEAD@{43}: checkout: moving from main to task/01-collaborators
+daa77eb HEAD@{44}: reset: moving to daa77eb
+52a95b0 HEAD@{45}: merge refs/remotes/origin/main: Fast-forward
+daa77eb HEAD@{46}: checkout: moving from task/01-collaborators to main
+1299e0a HEAD@{47}: commit: Feature: Setup collaborators
+daa77eb HEAD@{48}: checkout: moving from main to task/01-collaborators
+daa77eb HEAD@{49}: clone: from https://github.com/093-Pakornlam/github-olarn-practice.git
