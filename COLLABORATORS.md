@@ -1,7 +1,7 @@
 # Collaborators
 
 ## Owner
-- Full Name: YOUR REAL NAME
+- Full Name: Pakornlam Pokaprakorn
 
 ## Collaborator (Simulated)
 - GitHub Actions Bot
