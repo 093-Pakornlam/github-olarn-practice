@@ -37,176 +37,136 @@ environment.
   and integration changes.
 
 - **.github/workflows/classroom.yml**  
-  Defines automated repository behavior and validation processes.
+  Defines automated repository behavior.
 
 ---
 
-## Part 1 – Repository Setup and Ownership
+## General Branch Rules
 
-### Objective
-Establish structured responsibility and task ownership.
+* **Separate Branch for Every Task**: All work must be performed in specific branches.
+* **Mandatory Pull Requests**: Complete the work in the branch first, then merge into `main` via a Pull Request.
+* **No Direct Work on `main**`: All commits must happen within task branches.
+* **Identity Configuration**: Set your Git identity to match these values before committing:
+* **Name**: `FIRSTNAME LASTNAME (Github-Practice)`
+* **Email**: `YOUR_PRIVATE_GITHUB_EMAIL@users.noreply.github.com`
 
-### Instructions
-1. Record repository ownership information.
-2. Define simulated collaborator identity.
-3. Track task progress until completion.
-4. Integrate ownership information into the main codebase.
 
----
-
-## Part 2 – Feature Development
-
-### Objective
-Simulate isolated development and controlled integration.
-
-### Instructions
-1. Modify repository content in an isolated development path.
-2. Validate changes before integration.
-3. Integrate completed work into the main codebase.
-4. Confirm repository stability after integration.
 
 ---
 
-## Part 3 – Conflict Simulation and Resolution
+# Task Workflow
 
-### Objective
-Understand how conflicting changes occur and are resolved.
+### Part 1 – Repository Setup and Ownership
 
-### Instructions
-1. Apply different modifications to the same content from separate development paths.
-2. Attempt to combine the changes.
-3. Analyze conflicting content.
-4. Resolve the conflict to produce the intended final version.
+**Branch:** `task/01-collaborators` (Base: `main`)
 
----
+1. Create branch `task/01-collaborators` from `main`.
+2. Edit `COLLABORATORS.md`:
+* Update the **Owner** section with your real name.
 
-## Part 4 – Change Recovery
 
-### Objective
-Restore repository state after unintended changes.
+3. Commit message: `Feature: Setup collaborators`.
+4. Create a Pull Request and merge into `main`.
 
-### Instructions
-1. Introduce unintended modifications.
-2. Restore previous file content.
-3. reverse completed changes when necessary.
-4. Confirm repository integrity after recovery.
+### Part 2 – Feature Development
 
----
+**Branch:** `task/02-feature-index` (Base: `main`)
 
-## Part 5 – History Restructuring
+1. Create branch `task/02-feature-index` from `main`.
+2. **Modify `index.html**`: Add the following sections into the `<body>`:
+* **Line 10**: Add `<h2>Feature Section</h2>`.
+* **Line 12**: Add `<h2>Conflict Simulation</h2>`.
+* **Line 14**: Add `<h2>Automated Update Section</h2>`.
+* **Line 15**: Add the markers:
+```html
 
-### Objective
-Maintain a clean and logical development timeline.
+```
 
-### Instructions
-1. Reorganize development history.
-2. Resolve integration issues during restructuring.
-3. Confirm that the final history reflects intended development order.
 
----
 
-## Part 6 – Remote Update Simulation
 
-### Objective
-Simulate independent remote repository changes.
+3. Commit message: `Feature: Update index.html content`.
+4. Create a Pull Request and merge into `main`.
 
-### Instructions
-1. Submit updates to the repository.
-2. Observe automated remote modifications.
-3. Synchronize local work with remote changes.
-4. Resolve differences after synchronization.
+### Part 3 – Conflict Simulation (Creation)
 
----
+**Branches:** `task/03-conflict-create` and `task/03b-conflict-create-alt` (Base: `main`)
 
-## Part 7 – Task Tracking
+1. **Branch A**: Create `task/03-conflict-create`.
+* **Modify Line 13**: Change the text under "Conflict Simulation".
+* Commit message: `Conflict: Modify same line in index.html`.
 
-### Objective
-Simulate project management workflow.
 
-### Instructions
-1. Define structured work items.
-2. Track progress through defined states.
-3. Link completed work to corresponding tasks.
+2. **Branch B**: Create `task/03b-conflict-create-alt` from `main`.
+* **Modify Line 13**: Change the text to something **different** than Branch A.
+* Commit message: `Conflict: Modify same line in index.html`.
 
----
 
-## Part 8 – Automated Repository Behavior
+3. **Do not merge yet.**
 
-### Objective
-Observe automated modifications applied to repository content.
+### Part 4 – Conflict Resolution
 
-### Behavior
+**Branch:** `task/04-conflict-resolve` (Base: `task/03-conflict-create`)
 
-After updates are submitted, an automated process performs the following actions:
+1. Create branch `task/04-conflict-resolve` from `task/03-conflict-create`.
+2. Merge `task/03b-conflict-create-alt` into this branch to trigger the conflict on **Line 13**.
+3. Manually resolve the markers in `index.html`.
+4. Commit message: `Merge: Resolve conflict on index.html`.
+5. Create a Pull Request and merge into `main`.
 
-- Overwrites `index.html` with updated content
-- Updates `COLLABORATORS.md` with remote contributor activity
-- Creates a new repository commit representing remote changes
+### Part 5 – Change Recovery
 
-This simulates an external contributor modifying repository content independently.
+**Branch:** `task/05-recovery` (Base: `main`)
 
----
+1. Create branch `task/05-recovery` from `main`.
+2. Delete content or corrupt `index.html`.
+3. Restore the file to its previous state.
+4. Commit message: `Recovery: Restore previous state`.
+5. Create a Pull Request and merge into `main`.
 
-## Part 9 – Evidence Collection
+### Part 6 – History Restructuring
 
-### Objective
-Maintain verifiable records of repository activity.
+**Branch:** `task/06-history` (Base: `main`)
 
-### Evidence Includes
+1. Create branch `task/06-history` from `main`.
+2. Reorganize your commit history for clarity.
+3. Commit message: `History: Reorganize commits`.
+4. Create a Pull Request and merge into `main`.
 
-- branch movements
-- integration events
-- conflict resolution
-- history recovery
-- automated remote updates
+### Part 7 – Evidence Collection
 
-All records are stored in the `reflog/` directory.
+**Branch:** `task/07-evidence-reflog` (Base: `main`)
+
+1. Create branch `task/07-evidence-reflog` from `main`.
+2. Create folder `reflog/` and add `reflog_HEAD.txt`.
+3. Commit message: `Evidence: Add reflog records`.
+4. Create a Pull Request and merge into `main`.
 
 ---
 
-## Commit Message Keywords
+## Validation
 
-Repository activity is tracked using structured commit message identifiers.
+Run the script to check your progress: `sh test.sh`
 
-Use the following formats:
+**Pass Criteria:**
 
-- Feature development  
-  `Feature: Update index.html content`
-
-- Conflict creation  
-  `Conflict: Modify same line in index.html`
-
-- Conflict resolution  
-  `Merge: Resolve conflict on index.html`
-
-- Recovery operations  
-  `Recovery: Restore previous state`
-
-- History restructuring  
-  `History: Reorganize commits`
-
-- Evidence recording  
-  `Evidence: Add reflog records`
-
-- Automated remote update  
-  `auto: simulate remote collaborator update`
-
-If a commit message does not match the required format, it must be corrected  
-to maintain consistent activity tracking.
+* Final Score: **100/100**.
+* All task branches must be merged into `main`.
+* Commit identity must be exactly as specified in the rules.
 
 ---
 
-## Validation and Inspection
+## Submission Requirements
 
-Repository activity can be verified through:
+Your repository must include:
 
-- workflow execution records
-- automated commit history
-- updated repository files
-- preserved activity logs
-
-Successful execution confirms synchronization between local development,  
-remote automation, and repository history.
+- All required task branches
+- Correct commit message structure
+- Valid commit identity
+- Conflict resolution history
+- Recovery operations
+- Restructured history
+- Activity log evidence
 
 ---
 
@@ -227,3 +187,5 @@ The practice demonstrates:
 - activity verification  
 
 All repository behavior reflects realistic multi-contributor development conditions.
+
+

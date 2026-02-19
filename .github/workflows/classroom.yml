@@ -1,73 +1,82 @@
-name: Classroom Automation and Validation
+name: Automation (Safe Section Update)
 
 on:
   push:
     branches:
-      - main
-      - "feature/*"
-      - "conflict/*"
-      - "rebase/*"
+      - "task/*"
 
 permissions:
   contents: write
 
 jobs:
-  simulate-remote-collaborator:
-    # prevent infinite loop when bot pushes
+  simulate_remote_collaborator:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # --------------------------------
-      # Overwrite index.html
-      # --------------------------------
-      - name: Overwrite index.html
+      - name: Capture branch name and timestamp
         run: |
-          cat > index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-              <meta charset="UTF-8">
-              <title>Auto Updated</title>
-          </head>
-          <body>
-              <h1>INT142 Practice Repository</h1>
-              <p>This file was overwritten automatically by GitHub Actions.</p>
-              <p>Timestamp: __TIME__</p>
-          </body>
-          </html>
-          EOF
-          sed -i "s/__TIME__/$(date -u)/g" index.html
+          echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          echo "STAMP=$(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_ENV
 
-      # --------------------------------
-      # Update COLLABORATORS.md
-      # --------------------------------
-      - name: Update collaborators
+      - name: Update index.html (only AUTO-UPDATE section)
+        run: |
+          if [ ! -f index.html ]; then
+            echo "index.html not found"
+            exit 1
+          fi
+
+          if ! grep -Fq "<!-- AUTO-UPDATE-START -->" index.html || ! grep -Fq "<!-- AUTO-UPDATE-END -->" index.html; then
+            echo "Missing AUTO-UPDATE markers in index.html"
+            exit 1
+          fi
+
+          python3 - << 'PY'
+          import os, re
+          branch = os.environ.get("BRANCH_NAME", "")
+          stamp  = os.environ.get("STAMP", "")
+          with open("index.html", "r", encoding="utf-8") as f:
+              s = f.read()
+
+          block = (
+              "  <p id=\"auto-update\">Updated automatically by a simulated remote collaborator.</p>\n"
+              f"  <p><strong>Branch:</strong> {branch}</p>\n"
+              f"  <p><strong>Timestamp (UTC):</strong> {stamp}</p>\n"
+          )
+
+          pattern = r"(<!-- AUTO-UPDATE-START -->)(.*?)(<!-- AUTO-UPDATE-END -->)"
+          if not re.search(pattern, s, flags=re.S):
+              raise SystemExit("Markers not found (regex)")
+
+          s2 = re.sub(pattern, r"\1\n" + block + r"\3", s, flags=re.S)
+
+          with open("index.html", "w", encoding="utf-8") as f:
+              f.write(s2)
+          PY
+
+      - name: Update COLLABORATORS.md (append log line)
         run: |
           if [ ! -f COLLABORATORS.md ]; then
             cat > COLLABORATORS.md << 'EOF'
           # Collaborators
 
           ## Owner
-          - Full Name: YOUR_NAME_HERE
+          - Full Name: YOUR REAL NAME
 
           ## Collaborator (Simulated)
           - GitHub Actions Bot
           - Role: Automated remote update
           EOF
-          else
-            echo "" >> COLLABORATORS.md
-            echo "- Updated automatically at: $(date -u)" >> COLLABORATORS.md
           fi
 
-      # --------------------------------
-      # Commit changes
-      # --------------------------------
+          echo "" >> COLLABORATORS.md
+          echo "- Updated by automation on branch ${BRANCH_NAME} at ${STAMP}" >> COLLABORATORS.md
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
@@ -76,8 +85,5 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "auto: simulate remote collaborator update"
 
-      # --------------------------------
-      # Push back to repo
-      # --------------------------------
-      - name: Push changes
+      - name: Push
         run: git push
