@@ -15,7 +15,6 @@
 # - Does NOT check required files list (by request)
 # - Ignores GitHub Actions bot commits
 # ============================================================
-on: workflow_dispatch
 # ---------------- CONFIG ----------------
 EXPECTED_NAME="FIRSTNAME LASTNAME (Github-Practice)"
 EXPECTED_EMAIL="YOUR_PRIVATE_GITHUB_EMAIL@users.noreply.github.com"

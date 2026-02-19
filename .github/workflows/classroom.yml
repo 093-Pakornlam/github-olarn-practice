@@ -1,3 +1,5 @@
+on: workflow_dispatch
+
 name: Automation (Safe Section Update)
 
 on:
